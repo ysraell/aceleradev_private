@@ -41,10 +41,12 @@ RUN jupyter serverextension enable --py jupyterlab_templates
 
 
 #Set environment for AceleraDev
-#RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_linux.tar.gz | tar xvz
-#RUN mv codenation /usr/local/bin
-#RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
-#For test: cd ~/codenation/go-0  ; codenation test -c go-0
+RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_linux.tar.gz | tar xvz
+RUN mv codenation /usr/local/bin
+RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
+#For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
+
+RUN pip install pytest
 
 # Mount point of your $HOME
 RUN mkdir /work
