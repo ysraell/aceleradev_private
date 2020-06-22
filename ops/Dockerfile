@@ -24,10 +24,6 @@ RUN wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.
 RUN pip install -U pip --no-cache-dir
 COPY /requirements.txt /requirements.txt
 RUN pip install -r requirements.txt --no-cache-dir
-# For modules to other things
-# For run https://github.com/rasbt/deeplearning-models
-# Streamlit needs that:
-RUN pip install streamlit --no-cache-dir
 
 RUN jupyter nbextension enable --py --sys-prefix ipysankeywidget
 RUN jupyter nbextension enable --py --sys-prefix widgetsnbextension
@@ -45,8 +41,6 @@ RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_lin
 RUN mv codenation /usr/local/bin
 RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
 #For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
-
-RUN pip install pytest
 
 # Mount point of your $HOME
 RUN mkdir /work
