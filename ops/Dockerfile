@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y \
   zsh \
   mtr \
   whois \
+  curl libboost-python-dev libboost-dev build-essential zlib1g-dev \
+  libboost-system-dev libboost-program-options-dev \
   npm && rm -rf /var/cache/apt && rm -rf /var/lib/apt/lists/*
 
 # terminal colors with xterm
