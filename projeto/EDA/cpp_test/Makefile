@@ -17,7 +17,7 @@ PYTHON_INC := /usr/include/python$(PYTHON_VERSION)
 BOOST_INC := /usr/include/boost
 BOOST_LIB_LOCATION := /usr/lib/x86_64-linux-gnu
 BOOST_LIB_FILE := boost_python3
-EIGEN_INC := /usr/local/eigen
+EIGEN_INC := /usr/local/eigen-3.3.7
 
 CC := gcc
 

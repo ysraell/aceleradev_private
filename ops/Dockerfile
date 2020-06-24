@@ -44,6 +44,11 @@ RUN mv codenation /usr/local/bin
 RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
 #For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
 
+
+#Using Eigen from Tuxfamily
+RUN wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2 && tar xfjv eigen-3.3.7.tar.bz2 && rm eigen-3.3.7.tar.bz2
+RUN mv eigen-3.3.7 /usr/local/
+
 # Mount point of your $HOME
 RUN mkdir /work
 
