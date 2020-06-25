@@ -19,9 +19,9 @@ limitations under the License.
 
 using Eigen::MatrixXd;
 
-double greet()
+double greet(int N)
 {
-  MatrixXd m = MatrixXd::Random(2,2);
+  MatrixXd m = MatrixXd::Random(N,N);
   return m.norm();
 }
 
