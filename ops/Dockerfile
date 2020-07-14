@@ -58,5 +58,5 @@ RUN mkdir /work
 # All servers need be in:
 COPY /servers.sh /servers.sh
 WORKDIR /
-EXPOSE 8888 8501
+EXPOSE 8889 8502
 CMD ["/servers.sh"]
