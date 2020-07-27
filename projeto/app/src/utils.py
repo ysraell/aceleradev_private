@@ -58,7 +58,7 @@ def normalize(x: Vector) -> Vector:
 def load_dataset(
     path_data: Path = "../data/",
     train_list: List[int] = [0],
-    test_list: List[int] = [0, 1],
+    test_list: List[int] = [0, 1, 2],
     train_test_merged: bool = False,
 ) -> (TrainDS, TestDS):
     """
@@ -95,7 +95,7 @@ def load_dataset(
         logger.info("Carregando dataset de teste...")
         df_ep_list = [pd.read_csv(path_data + "test_{}.csv".format(i)) for i in test_list]
         tmp = []
-        for i in range(2):
+        for i in range(len(df_ep_list)):
             df_ep_list[i]["P"] = i + 1
             tmp.append(df_ep_list[i][["id", "P"]])
         df_test = pd.concat(tmp).drop_duplicates().reset_index(drop=True)
