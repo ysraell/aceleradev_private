@@ -12,6 +12,7 @@
 8. [Experimento E](#EE)
 9. [Experimento F](#EF)
 10. ["Enlatando" o código](#lata)
+11. [Conclusões](#conclusoes)
 
 
 # 1. Introdução <a name="intro"></a>
@@ -127,7 +128,7 @@ Notebooks: [Pythran/Basic_Tutorial](https://github.com/ysraell/examples/blob/mas
 
 # 8. Experimento E. <a name="EE"></a>
 
-[Experiment_E](https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_E.ipynb)
+Notebook: [Experiment_E](https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_E.ipynb)
 
 - Comecei a usar todo o *dataset*, todas as colunas.
 - Consolidei o processamento dos dados pré treino, agora robusto e normalizado. Excluindo apenas as colunas que não apresentavam informação alguma, reduzindo do total de 182 colunas para 167.
@@ -137,3 +138,45 @@ Notebooks: [Pythran/Basic_Tutorial](https://github.com/ysraell/examples/blob/mas
 - Implementei o uso das funções PCA, FastICA, FactorAnalysis, IncrementalPCA, TruncatedSVD e NMF, todas do módulo `decomposition` do [*scikit-learn*](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html).
 - Fiz experimentos de performance (tempo e consumo de memória) com todas as funções para melhor planejar o experimento F, no qual faria a busca por parâmetros.
 
+# 9. Experimento F. <a name="EF"></a>
+
+NOtebooks: [Experiment_F](https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_F.ipynb), [Experiment_F3](https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_F3_A1.ipynb) e [Métricas](https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Check_results.ipynb).
+
+- Maturação do código: revisão e validação de performance.
+- Escrita de um processo de geração de métricas considerando todas as possibilidades de pré-processamento, método de fatoração, redução de dimensionalidade e cálculo das similaridades (distâncias entre vetores).
+- Enlatamento do código e nova validação e bateria de experimentos.
+
+# 10. "Enlatando" o código. <a name="lata"></a>
+
+### `app`
+
+`app/src`: Diretório com os módulos da aplicação.
+- `app/src/model.py`: Módulo com a classe do modelo.
+- `app/src/recommender.py`: Módulo com a classe para carregar e usar o modelo.
+- `app/src/train.py`: Módulo para treino e salvamento do modelo.
+- `app/src/utils.py`: Módulo com funções auxiliares.
+
+Notebook de demonstração: [Usage.ipynb](https://github.com/ysraell/aceleradev_private/blob/master/projeto/app/Usage.ipynb).
+
+# 10. Conclusões. <a name="conclusoes"></a>
+
+### Experiência da jornada no AceleraDev:
+
+- As aulas do professor [Túlio Vieira de Souza](https://www.linkedin.com/in/tuliovieira/) são excelentes!
+- O material fornecido também! Eu aprende muita coisa nova e aprofundei outros conhecimentos graças a boa curadoria do material.
+- Os [notebooks](https://github.com/codenation-dev/Data-Science-Online) do [Kazuki Yokoyama](https://www.linkedin.com/in/kmyokoyama/) são bem caprichados, principalmente na notação matemática, para mim foram muito bons de estudar por eles.
+- Atuar junto a uma comunidade foi uma experiência impar, nunca tinha feito parte de uma comunidade tão grande de cientistas de dados e de diversos níveis de experiência.
+- A troca de ideias e fazer um saudável *networking* foram duas das principais vantagens em participar do curso.
+
+### Experiência no desenvolvimento do projeto final:
+
+- Mais uma excelente oportunidade de usar dados reais (ou bem próximos de serem reais, vai saber de onde tiraram) e fazer uma entrega real e completa.
+- Tive um grande prazer em aplicar os fundamentos de metodologias ágeis: ciclos curtos de aprendizagem, experimentos com escopos e métricas bem definidas, deixando ideias novas para o próximos experimento, e sem medo de jogar fora o que fora desenvolvido.
+- Conheci novas bibliotecas e métodos, tanto para melhora de desempenho como JAX, Pythran e até [Boost.Python](https://www.boost.org/doc/libs/1_70_0/libs/python/doc/html/index.html) (sim! eu cheguei a tentar fazer algumas coisas em C++), quanto para outros fins diversos (*loguru* e alguma do *sklearn.decomposition*).
+
+
+
+*ysraell/aceleradev_private and everything under are licensed under the*
+**BSD 3-Clause License**
+
+*Copyright (c) 2020, Israel Gonçalves de Oliveira. All rights reserved.*
