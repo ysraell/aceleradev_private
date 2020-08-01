@@ -158,6 +158,23 @@ NOtebooks: [Experiment_F](https://github.com/ysraell/aceleradev_private/blob/mas
 
 Notebook de demonstração: [Usage.ipynb](https://github.com/ysraell/aceleradev_private/blob/master/projeto/app/Usage.ipynb).
 
+### Observações sobre o modelo final.
+
+- Limitado às empresas cadastradas antes do treino.
+- Complexidade de fazer um *encoder* genérico, visto a abordagem de fatoração e redução de dimensionalidade.
+- A redução de dimensionalidade apresenta maior vantagem na melhora da recomendação e não necessariamente na redução do tempo de processamento geral (dada a presente quantidade e características dos dados). E o objetivo em usar uma decomposição foi para melhorar a recomendação.
+- Calcular a distância de cada empresa (vetor) de entrada para cada uma existente no *dataset*: talvez o modelo não seja escalável: tanto pelo tempo quanto pelo possível uso de memória se forem salvas as distâncias. É possível otimizar o uso de memória salvando apenas a ordem de proximidade (inteiros positivos até 16 bits - `uint16`), mas carece de validação.
+- As duas métricas de performance de recomendação: (1) total de acertos *vs* (2) percentual médio de acertos entre os portfólios. A métrica 1 é interessante para ajudar na busca por parâmetros e a 2 indica um grau de generalização. Quanto maior o portfólio, não seria maior a chance de acerto?  
+Total de empresas: 462.299 (estaticos_market.csv).  
+Portfólio 1: 567 (estaticos_portfolio2.csv).  
+Portfólio 2: 266 (estaticos_portfolio3.csv).  
+$ P1 = 2.1\times P2 $
+
+### Possibilidades de melhora.
+
+- A abordagem matricial baseada na similaridade entre vetores oferece certas limitações de escalabilidade. Talvez algum método baseado em uma indexação inteligente (otimizada): talvez algo usando o [*Elasticsearch*](https://www.elastic.co/pt/what-is/elasticsearch) como base dessa indexação, ou seguindo por estratégias como o [PageRank](https://web.stanford.edu/class/msande233/handouts/lecture8.pdf) etc. Me lembrei do sistema de recomendação de contatos do LinkedIn ([*Quora*](https://www.quora.com/How-does-LinkedIns-People-You-May-Know-work)), é um algoritmo de recomendação de conexões.
+- Assim pode-se resolver o problemas de considerar novas conexões pós treino do modelo (ou indexação inteligente).
+
 # 10. Conclusões. <a name="conclusoes"></a>
 
 ### Experiência da jornada no AceleraDev:
