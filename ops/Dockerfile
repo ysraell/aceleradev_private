@@ -24,7 +24,7 @@ RUN pip install -r requirements.txt --no-cache-d
 #Set environment for AceleraDev
 RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_linux.tar.gz | tar xvz
 RUN mv codenation /usr/local/bin
-RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
+#RUN codenation config -t 
 #For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
 
 
