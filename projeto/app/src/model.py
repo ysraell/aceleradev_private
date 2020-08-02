@@ -21,9 +21,9 @@ Raw = NewType("raw", str)
 class ExMatrix:
     def __init__(
         self,
-        process_values=escalaropt_entropy,
-        factorize=f_NMF,
-        vector_distance=BrayCurtis,
+        process_values=escalaropt_missings,
+        factorize=f_FastICA,
+        vector_distance=Manhattan,
         stateless: bool = True,
     ):
         """

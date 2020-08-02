@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 from typing import NewType, List, Dict
 from loguru import logger
-from sklearn.decomposition import NMF
+from sklearn.decomposition import NMF, FastICA
 
 Path = NewType("Path", str)
 TrainDS = NewType("TrainDS", pd.DataFrame)
@@ -58,7 +58,7 @@ def normalize(x: Vector) -> Vector:
 def load_dataset(
     path_data: Path = "../data/",
     train_list: List[int] = [0],
-    test_list: List[int] = [0, 1, 2],
+    test_list: List[int] = [0, 1],
     train_test_merged: bool = False,
 ) -> (TrainDS, TestDS):
     """
@@ -191,6 +191,30 @@ def escalaropt_entropy(df: ProcDS, score: ScoreColumns) -> ProcDS:
     return df_tmp
 
 
+def escalaropt_missings(df: ProcDS, score: ScoreColumns) -> ProcDS:
+    """
+        Aplica uma transformação nas colunas já numérica.
+        Essa transformação é baseada na quantidade de dados
+        faltantes, escalando os valores normalizados.
+
+    Arg:
+    ----
+        ProcDS: Dados no formato ProcDS normalizados nas colunas.
+        ScoreColumns: dicionário com as contagens de missing values.
+
+    Return:
+    -------
+        ProcDS: Dados no formato ProcDS rescalados nas colunas.
+    
+    """
+    df_score = pd.DataFrame(score.items(), columns=['col','score'])
+    df_score['escala_opt'] = 1-normalize((np.sqrt(df_score.score)))
+    df_score['escala_opt'] = df_score['escala_opt'].apply(lambda x: max(x,0.1))
+    df_tmp = pd.DataFrame()
+    for _, row in df_score.iterrows():
+        df_tmp[row.col] = row.escala_opt * df[row.col]
+    return df_tmp
+
 def BrayCurtis(X: Matrix, vec: Vector) -> Vector:
     """
         Calcula a distância de Bray Curtis entre o vetor `vec`
@@ -206,5 +230,19 @@ def f_NMF(M: Matrix, n_components: int = 62) -> Matrix:
     out = NMF(n_components=n_components)
     return out.fit_transform(M)
 
+def Manhattan(X: Matrix, vec: Vector) -> Vector:
+    """
+        Calcula a distância de Manhattan entre o vetor `vec`
+        e cada vetor da matriz `X`.
+    """
+    return abs(X - vec).sum(-1)
+
+
+def f_FastICA(M: Matrix, n_components: int = 39) -> Matrix:
+    """
+        Queremos apenas a transformação da matriz de entrada.
+    """
+    out = FastICA(n_components=n_components)
+    return out.fit_transform(M)
 
 # EOF
