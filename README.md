@@ -1,4 +1,4 @@
-![cover](images/logo.png)    ![cover](images/ds.svg) 
+![cover](projeto/docs/images/logo.png)    ![cover](projeto/docs/images/ds.svg) 
 
 # AceleraDev Data Science: Projeto Prático e desafios.
 
