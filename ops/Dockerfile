@@ -24,9 +24,6 @@ RUN pip install -r requirements.txt --no-cache-d
 #Set environment for AceleraDev
 RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_linux.tar.gz | tar xvz
 RUN mv codenation /usr/local/bin
-#RUN codenation config -t 
-#For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
-
 
 #Using Eigen from Tuxfamily
 #RUN wget https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2 && tar xfjv eigen-3.3.7.tar.bz2 && rm eigen-3.3.7.tar.bz2
