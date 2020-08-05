@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<!--Converted via md-to-html-->
+<html>
+ <head>
+ </head>
+ <body>
+  <p>
+   <img alt="cover" src="images/logo.png"/>
+   <img alt="cover" src="images/ds.svg"/>
+  </p>
+  <h1>
+   AceleraDev Data Science: Projeto Prático
+  </h1>
+  <h2>
+   Table of contents
+  </h2>
+  <ol>
+   <li>
+    <a href="#intro">
+     Introdução
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#Prólogo">
+     Sistema de recomendação? Como? (Prólogo)
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#handson">
+     EDA:
+     <em>
+      hands-on!
+     </em>
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#EA">
+     Experimento A
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#EB">
+     Experimento B
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#EC">
+     Experimento C
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#ED">
+     Experimento D
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#EE">
+     Experimento E
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#EF">
+     Experimento F
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#lata">
+     "Enlatando" o código
+    </a>
+   </li>
+  </ol>
+  <ol>
+   <li>
+    <a href="#conclusoes">
+     Conclusões
+    </a>
+   </li>
+  </ol>
+  <h1>
+   1. Introdução &lt;a name="intro"&gt;&lt;/a&gt;
+  </h1>
+  <h2>
+   Objetivo &lt;a name="Objetivo"&gt;&lt;/a&gt;
+  </h2>
+  <p>
+   O objetivo deste produto é fornecer um serviço automatizado que recomenda leads para um usuário dado sua atual lista de clientes (Portfólio).
+  </p>
+  <h2>
+   Contextualização
+  </h2>
+  <p>
+   Algumas empresas gostariam de saber quem são as demais empresas em um determinado mercado (população) que tem maior probabilidade se tornarem seus próximos clientes. Ou seja, a sua solução deve encontrar no mercado quem são os leads mais aderentes dado as características dos clientes presentes no portfólio do usuário.
+  </p>
+  <p>
+   Mais informações:
+   <a href="Instrucoes_Projeto.md">
+    Instruções do Projeto
+   </a>
+  </p>
+  <h3>
+   Autor: Israel Oliveira
+  </h3>
+  <p>
+   <img alt="cover" src="images/eu.png"/>
+  </p>
+  <p>
+   Resumo profissional:
+  </p>
+  <ul>
+   <li>
+    Téc. em informática (jun/2004).
+   </li>
+  </ul>
+  <p>
+   2002-2007: Técnico focado em Linux, serviços e segurança de internet e automação de servidores (shell script).
+  </p>
+  <ul>
+   <li>
+    Física Licenciatura (jan/2011).
+   </li>
+  </ul>
+  <p>
+   2007-2014: Professor de matemática, física, programação (e afins), ensinos fundamental, médio e técnico.
+  </p>
+  <ul>
+   <li>
+    M.Sc Eng. Elétrica (abr/2016) e Dr. Eng. Elétrica incompleto.
+   </li>
+  </ul>
+  <p>
+   2014-2018: Pesquisa em controle e automação, robótica, e reconhecimento de padrões.
+  </p>
+  <ul>
+   <li>
+    Cientista de dados.
+   </li>
+  </ul>
+  <p>
+   De 2018 até o momento: atividades de ciência de dados, engenharia de ML/AI, prototipagem, desenvolvimento de software e DevOps. Foco em ciência de dados e eng. de ML/AI.
+  </p>
+  <h1>
+   2. Sistema de recomendação? Como? (Prólogo) &lt;a name="Prólogo"&gt;&lt;/a&gt;
+  </h1>
+  <h3>
+   O que eu tenho?
+  </h3>
+  <p>
+   Revisei o capítulo 16,
+   <a href="http://d2l.ai/chapter_recommender-systems/index.html">
+    <em>
+     Recommender Systems
+    </em>
+   </a>
+   do livro online
+   <a href="http://d2l.ai/index.html">
+    <em>
+     Dive into Deep Learning
+    </em>
+   </a>
+   , para relembrar e aprender novas possibilidades. Tive experiências prévias com modelagens baseadas em
+   <a href="https://pt.wikipedia.org/wiki/Tf%E2%80%93idf">
+    <em>
+     TF-IDF
+    </em>
+   </a>
+   ,
+   <a href="https://www.csie.ntu.edu.tw/~b97053/paper/Rendle2010FM.pdf">
+    <em>
+     Factorization Machines
+    </em>
+    (Rendle, 2010)
+   </a>
+   e um método proprietário (patente requerida) baseado em
+   <a href="http://dataexperience.com.br/computacao-e-teoria-de-grafos-qual-a-relacao/">
+    grafo
+   </a>
+   e
+   <a href="https://en.wikipedia.org/wiki/Word2vec">
+    <em>
+     Word2Vec
+    </em>
+   </a>
+   . Das minhas seis patentes requeridas, 4 são de sistemas de recomendação. Uma delas é sobre um método de indexação inteligente focado no uso do
+   <a href="https://pt.wikipedia.org/wiki/Elasticsearch">
+    <em>
+     Elasticsearch
+    </em>
+   </a>
+   .
+  </p>
+  <h3>
+   Primeira ideia!
+  </h3>
+  <p>
+   Pensei em utilizar uma representação matricial, semelhante aos métodos baseados em fatoração matricial (FM). De fato, é uma das metodologias mais utilizadas nesse tipo de problema, baixa complexidade de treino e uso e é matematicamente robusta, principalmente com dados esparsos. Outro fator motivador foi ter uma experiência prévia com a biblioteca
+   <a href="http://surpriselib.com/">
+    <em>
+     Surprise
+    </em>
+   </a>
+   , que é facada em sistemas de recomendação. A estrutura da biblioteca me parece muito bem organizada e flexível. Desenvolvi um sistema de recomendação
+   <em>
+    user-user
+   </em>
+   estendendo uma das classes dessa biblioteca.
+  </p>
+  <h1>
+   3. EDA:
+   <em>
+    hands-on!
+   </em>
+   &lt;a name="handson"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   Notebook:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/First_View.ipynb">
+    First_View
+   </a>
+   .
+  </p>
+  <h4>
+   Principais observações:
+  </h4>
+  <ul>
+   <li>
+    Alto número de dados faltantes (
+    <em>
+     missing data
+    </em>
+    ) e "razoavelmente" distribuídos: quase toda as colunas possuem dados faltantes e a maioria em grandes quantidades. Um dataset
+    <strong>
+     esparso
+    </strong>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Variado em formatos. Seria um problema em um
+    <em>
+     encoding
+    </em>
+    automatizado?
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Com os portfólios foi possível obter as correlações. Mas o qual era a confiança no uso desses valores de correlação para uma seleção de colunas (
+    <em>
+     feature selection
+    </em>
+    )?
+   </li>
+  </ul>
+  <h4>
+   Conclusões:
+  </h4>
+  <ul>
+   <li>
+    Iniciar os experimentos com uma engenharia de
+    <em>
+     feature
+    </em>
+    objetivando um
+    <em>
+     encoding
+    </em>
+    aitomatizado.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Formatar para uso da biblioteca
+    <em>
+     Surprise
+    </em>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Metodologia de recomendação baseado uma decomposição
+    <a href="https://surprise.readthedocs.io/en/stable/matrix_factorization.html#surprise.prediction_algorithms.matrix_factorization.SVD">
+     <em>
+      SVD
+     </em>
+    </a>
+    para gerar os fatores
+    <em>
+     user
+    </em>
+    (espaço matemático dos usuários).
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Usar similaridade vetorial para recomendação.
+   </li>
+  </ul>
+  <h1>
+   4. Experimento A. &lt;a name="EA"&gt;&lt;/a&gt;
+  </h1>
+  <h4>
+   Revisão da biblioteca
+   <em>
+    Surprise
+   </em>
+   :
+  </h4>
+  <p>
+   Notebook:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Surprise_Review.ipynb">
+    Surprise_Review
+   </a>
+   .
+  </p>
+  <ul>
+   <li>
+    Revisei a documentação e como customizar um
+    <em>
+     dataset
+    </em>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Aproveitei os métodos auxiliares (
+    <em>
+     helpers
+    </em>
+    ) para
+    <em>
+     dataset
+    </em>
+    , treino e cálculo de métricas.
+   </li>
+  </ul>
+  <h4>
+   Engenharia de
+   <em>
+    feature
+   </em>
+   :
+  </h4>
+  <p>
+   Notebook:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_A.ipynb">
+    Experiment_A
+   </a>
+  </p>
+  <ul>
+   <li>
+    Iniciei com apenas 20 colunas das 167, pegando as de maior correlação absoluta com os portfólios.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    <em>
+     Encoding
+    </em>
+    de categóricos pra inteiros, de
+    <code>
+     1
+    </code>
+    até quantidade máxima de elementos únicos.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Todo valor faltante foi convertido para
+    <code>
+     0
+    </code>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Todas as colunas (já em formato numérico) normalizadas, escaladas entre
+    <code>
+     [0, 100]
+    </code>
+    e convertidas para
+    <code>
+     uint8
+    </code>
+    (
+    <em>
+     unsigned int 8 bits
+    </em>
+    : números inteiros de 8 bits).
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Como o valor máximo era
+    <code>
+     100
+    </code>
+    e inteiro, usei a representação mais econômica.
+   </li>
+  </ul>
+  <h4>
+   Experimento com o módulo
+   <code>
+    SVD
+   </code>
+   :
+  </h4>
+  <ul>
+   <li>
+    O tempo de treino ficou em média $405 s = 6,75 \text{min}$. E isso já não me pareceu bom, visto que estava usando menos de $20\%$ das colunas.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    RMSE em torno de $18$, visto que a escola de
+    <em>
+     rating
+    </em>
+    era 100. Data as circunstâncias, não me pareceu muito ruim. Todavia, não era uma maravilha!
+   </li>
+  </ul>
+  <h1>
+   5. Experimento B. &lt;a name="EB"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_B.ipynb">
+    Experiment_B
+   </a>
+  </p>
+  <ul>
+   <li>
+    Revisão do processamento do
+    <em>
+     dataset
+    </em>
+    para uso no treino.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Extensão da classe
+    <code>
+     SVD
+    </code>
+    adicionando o cálculo das distâncias e ordenamento pelos mais próximos.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Uso da função de busca por parâmetros de treino
+    <code>
+     GridSearchCV
+    </code>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Foi possível um RMSE em torno de $9$.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Usando ainda apenas 20 das 167 colunas.
+   </li>
+  </ul>
+  <h1>
+   6. Experimento C. &lt;a name="EC"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_C.ipynb">
+    Experiment_C
+   </a>
+  </p>
+  <ul>
+   <li>
+    Uso dos portfólios para o passo de teste das recomendações. Que é diferente do teste de estimativa de
+    <em>
+     rating
+    </em>
+    usado para cálculo do RMSE da função de validação cruzada da biblioteca.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Escrevi as funções de
+    <em>
+     encoder
+    </em>
+    e
+    <em>
+     decoder
+    </em>
+    , usando os recursos da biblioteca. Facilitou muito!
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Escrevi a heurística de recomendação: ordena pelos vizinhos mais próximos dos
+    <em>
+     leads
+    </em>
+    (
+    <em>
+     user
+    </em>
+    ) de entrada e desempata por votação.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Usei um recurso para manter o valor das distâncias já calculadas, o que reduzia significativamente o tempo necessário. Todavia, em experimentos futuros, o consumo de memória era muito alto. É possível contornar esse problema usando uma representação esparsa eficiente de inteiros, como a
+    <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.dok_matrix.html">
+     <em>
+      Dictionary Of Keys based sparse matrix
+     </em>
+    </a>
+    , a qual cheguei a usar mas não para isso.
+   </li>
+  </ul>
+  <h1>
+   7. Experimento D. &lt;a name="ED"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   Notebooks:
+   <a href="https://github.com/ysraell/examples/blob/master/Pythran/Basic_Tutorial.ipynb">
+    Pythran/Basic_Tutorial
+   </a>
+   ,
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_D.ipynb">
+    Experiment_D
+   </a>
+   e
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_D2.ipynb">
+    Experiment_D2
+   </a>
+  </p>
+  <ul>
+   <li>
+    Apliquei melhorias no processamento do
+    <em>
+     dataset
+    </em>
+    , mas continuava usando poucas colunas.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Usei
+    <a href="https://pythran.readthedocs.io/en/latest/">
+     <em>
+      Pythran
+     </em>
+    </a>
+    e
+    <a href="https://jax.readthedocs.io/en/latest/notebooks/quickstart.html">
+     <em>
+      JAX
+     </em>
+    </a>
+    para reduzir o tempo de cálculo das distâncias, da fatoração e outras possíveis.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    O passo de treino continua lento, ficando complicado de uma busca por parÂmetros.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Resolvi que deveria abandonar a biblioteca
+    <em>
+     Surprise
+    </em>
+    e escrever o módulo de treino.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Num primeiro momento houve um certo ganho de performance, principalmente no passo de treino.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    E os primeiros resultados de acurácia de recomendação
+    <code>
+     1-1
+    </code>
+    foi de 0 para o portfólio 1, $22%$ para o 2 e $23%$ para o 3. Nisso já comecei a ficar desconfiado desse primeiro portfólio. Conversando com outros colegas, eles também relataram que esse portfólio estava com métricas bem ruins e o 2 e o 3 estavam boas.
+   </li>
+  </ul>
+  <h1>
+   8. Experimento E. &lt;a name="EE"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   Notebook:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_E.ipynb">
+    Experiment_E
+   </a>
+  </p>
+  <ul>
+   <li>
+    Comecei a usar todo o
+    <em>
+     dataset
+    </em>
+    , todas as colunas.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Consolidei o processamento dos dados pré treino, agora robusto e normalizado. Excluindo apenas as colunas que não apresentavam informação alguma, reduzindo do total de 182 colunas para 167.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Consolidei o algoritmo e seus métodos.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Escrevi diferentes funções para cálculo de distância: Manhattan, Camberra, Bray Curtis e Cosseno.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Funções para transformar os dados (já encodados e normalizados) de forma otimizada: 1) considerando valores faltantes, 2) pelo desvio padrão e 3) pela entropia.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Implementei o uso das funções PCA, FastICA, FactorAnalysis, IncrementalPCA, TruncatedSVD e NMF, todas do módulo
+    <code>
+     decomposition
+    </code>
+    do
+    <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">
+     <em>
+      scikit-learn
+     </em>
+    </a>
+    .
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Fiz experimentos de performance (tempo e consumo de memória) com todas as funções para melhor planejar o experimento F, no qual faria a busca por parâmetros.
+   </li>
+  </ul>
+  <h1>
+   9. Experimento F. &lt;a name="EF"&gt;&lt;/a&gt;
+  </h1>
+  <p>
+   NOtebooks:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_F.ipynb">
+    Experiment_F
+   </a>
+   ,
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Experiment_F3_A1.ipynb">
+    Experiment_F3
+   </a>
+   e
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/EDA/Check_results.ipynb">
+    Métricas
+   </a>
+   .
+  </p>
+  <ul>
+   <li>
+    Maturação do código: revisão e validação de performance.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Escrita de um processo de geração de métricas considerando todas as possibilidades de pré-processamento, método de fatoração, redução de dimensionalidade e cálculo das similaridades (distâncias entre vetores).
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Enlatamento do código e nova validação e bateria de experimentos.
+   </li>
+  </ul>
+  <h1>
+   10. "Enlatando" o código. &lt;a name="lata"&gt;&lt;/a&gt;
+  </h1>
+  <h3>
+   <code>
+    app
+   </code>
+  </h3>
+  <p>
+   <code>
+    app/src
+   </code>
+   : Diretório com os módulos da aplicação.
+  </p>
+  <ul>
+   <li>
+    <code>
+     app/src/model.py
+    </code>
+    : Módulo com a classe do modelo.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    <code>
+     app/src/recommender.py
+    </code>
+    : Módulo com a classe para carregar e usar o modelo.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    <code>
+     app/src/train.py
+    </code>
+    : Módulo para treino e salvamento do modelo.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    <code>
+     app/src/utils.py
+    </code>
+    : Módulo com funções auxiliares.
+   </li>
+  </ul>
+  <p>
+   Notebook de demonstração:
+   <a href="https://github.com/ysraell/aceleradev_private/blob/master/projeto/app/Usage.ipynb">
+    Usage.ipynb
+   </a>
+   .
+  </p>
+  <h3>
+   Observações sobre o modelo final.
+  </h3>
+  <ul>
+   <li>
+    Limitado às empresas cadastradas antes do treino.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Complexidade de fazer um
+    <em>
+     encoder
+    </em>
+    genérico, visto a abordagem de fatoração e redução de dimensionalidade.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    A redução de dimensionalidade apresenta maior vantagem na melhora da recomendação e não necessariamente na redução do tempo de processamento geral (dada a presente quantidade e características dos dados). E o objetivo em usar uma decomposição foi para melhorar a recomendação.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Calcular a distância de cada empresa (vetor) de entrada para cada uma existente no
+    <em>
+     dataset
+    </em>
+    : talvez o modelo não seja escalável: tanto pelo tempo quanto pelo possível uso de memória se forem salvas as distâncias. É possível otimizar o uso de memória salvando apenas a ordem de proximidade (inteiros positivos até 16 bits -
+    <code>
+     uint16
+    </code>
+    ), mas carece de validação.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    As duas métricas de performance de recomendação: (1) total de acertos
+    <em>
+     vs
+    </em>
+    (2) percentual médio de acertos entre os portfólios. A métrica 1 é interessante para ajudar na busca por parâmetros e a 2 indica um grau de generalização. Quanto maior o portfólio, não seria maior a chance de acerto?
+   </li>
+  </ul>
+  <p>
+   Total de empresas: 462.299 (estaticos_market.csv).
+  </p>
+  <p>
+   Portfólio 1: 567 (estaticos_portfolio2.csv).
+  </p>
+  <p>
+   Portfólio 2: 266 (estaticos_portfolio3.csv).
+  </p>
+  <p>
+   $ P1 = 2.1\times P2 $
+  </p>
+  <h3>
+   Possibilidades de melhora.
+  </h3>
+  <ul>
+   <li>
+    A abordagem matricial baseada na similaridade entre vetores oferece certas limitações de escalabilidade. Talvez algum método baseado em uma indexação inteligente (otimizada): talvez algo usando o
+    <a href="https://www.elastic.co/pt/what-is/elasticsearch">
+     <em>
+      Elasticsearch
+     </em>
+    </a>
+    como base dessa indexação, ou seguindo por estratégias como o
+    <a href="https://web.stanford.edu/class/msande233/handouts/lecture8.pdf">
+     PageRank
+    </a>
+    etc. Me lembrei do sistema de recomendação de contatos do LinkedIn (
+    <a href="https://www.quora.com/How-does-LinkedIns-People-You-May-Know-work">
+     <em>
+      Quora
+     </em>
+    </a>
+    ), é um algoritmo de recomendação de conexões.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Assim pode-se resolver o problemas de considerar novas conexões pós treino do modelo (ou indexação inteligente).
+   </li>
+  </ul>
+  <h1>
+   10. Conclusões. &lt;a name="conclusoes"&gt;&lt;/a&gt;
+  </h1>
+  <h3>
+   Experiência da jornada no AceleraDev:
+  </h3>
+  <ul>
+   <li>
+    As aulas do professor
+    <a href="https://www.linkedin.com/in/tuliovieira/">
+     Túlio Vieira de Souza
+    </a>
+    são excelentes!
+   </li>
+  </ul>
+  <ul>
+   <li>
+    O material fornecido também! Eu aprende muita coisa nova e aprofundei outros conhecimentos graças a boa curadoria do material.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Os
+    <a href="https://github.com/codenation-dev/Data-Science-Online">
+     notebooks
+    </a>
+    do
+    <a href="https://www.linkedin.com/in/kmyokoyama/">
+     Kazuki Yokoyama
+    </a>
+    são bem caprichados, principalmente na notação matemática, para mim foram muito bons de estudar por eles.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Atuar junto a uma comunidade foi uma experiência impar, nunca tinha feito parte de uma comunidade tão grande de cientistas de dados e de diversos níveis de experiência.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    A troca de ideias e fazer um saudável
+    <em>
+     networking
+    </em>
+    foram duas das principais vantagens em participar do curso.
+   </li>
+  </ul>
+  <h3>
+   Experiência no desenvolvimento do projeto final:
+  </h3>
+  <ul>
+   <li>
+    Mais uma excelente oportunidade de usar dados reais (ou bem próximos de serem reais, vai saber de onde tiraram) e fazer uma entrega real e completa.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Tive um grande prazer em aplicar os fundamentos de metodologias ágeis: ciclos curtos de aprendizagem, experimentos com escopos e métricas bem definidas, deixando ideias novas para o próximos experimento, e sem medo de jogar fora o que fora desenvolvido.
+   </li>
+  </ul>
+  <ul>
+   <li>
+    Conheci novas bibliotecas e métodos, tanto para melhora de desempenho como JAX, Pythran e até
+    <a href="https://www.boost.org/doc/libs/1_70_0/libs/python/doc/html/index.html">
+     Boost.Python
+    </a>
+    (sim! eu cheguei a tentar fazer algumas coisas em C++), quanto para outros fins diversos (
+    <em>
+     loguru
+    </em>
+    e alguma do
+    <em>
+     sklearn.decomposition
+    </em>
+    ).
+   </li>
+  </ul>
+  <p>
+   <em>
+    ysraell/aceleradev_private and everything under are licensed under the
+   </em>
+  </p>
+  <p>
+   <strong>
+    BSD 3-Clause License
+   </strong>
+  </p>
+  <p>
+   <em>
+    Copyright (c) 2020, Israel Gonçalves de Oliveira. All rights reserved.
+   </em>
+  </p>
+ </body>
+</html>

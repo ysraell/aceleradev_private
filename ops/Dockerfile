@@ -8,23 +8,26 @@ RUN apt-get update && apt-get install -y \
   vim \
   jed \
   nano \
+  nodejs \
   zsh \
+  mtr \
+  whois \
+  python-pydot \
+  python-pydot-ng \
+  graphviz \
   npm && rm -rf /var/cache/apt && rm -rf /var/lib/apt/lists/*
 
-# terminal colors with xterm
 ENV TERM xterm
-# set the zsh theme
 ENV ZSH_THEME agnoster
-# run the installation script  
 RUN wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O - | zsh || true
 
 RUN pip install -U pip --no-cache-dir
 COPY /requirements.txt /requirements.txt
-RUN pip install -r requirements.txt --no-cache-d
+RUN pip install -r requirements.txt --no-cache-dir
+
 #Set environment for AceleraDev
 RUN curl https://s3-us-west-1.amazonaws.com/codenation-cli/latest/codenation_linux.tar.gz | tar xvz
 RUN mv codenation /usr/local/bin
-RUN codenation config -t 2816bb242252e72b8f6adfec61272c2892405e07
 #For test: cd /work/aceleradev_private/data-science-0  ; codenation test -c data-science-0
 
 
