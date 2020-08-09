@@ -175,7 +175,7 @@ $ P1 = 2.1\times P2 $
 - A abordagem matricial baseada na similaridade entre vetores oferece certas limitações de escalabilidade. Talvez algum método baseado em uma indexação inteligente (otimizada): talvez algo usando o [*Elasticsearch*](https://www.elastic.co/pt/what-is/elasticsearch) como base dessa indexação, ou seguindo por estratégias como o [PageRank](https://web.stanford.edu/class/msande233/handouts/lecture8.pdf) etc. Me lembrei do sistema de recomendação de contatos do LinkedIn ([*Quora*](https://www.quora.com/How-does-LinkedIns-People-You-May-Know-work)), é um algoritmo de recomendação de conexões.
 - Assim pode-se resolver o problemas de considerar novas conexões pós treino do modelo (ou indexação inteligente).
 
-# 10. Conclusões. <a name="conclusoes"></a>
+# 11. Conclusões. <a name="conclusoes"></a>
 
 ### Experiência da jornada no AceleraDev:
 
