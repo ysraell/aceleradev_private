@@ -18,10 +18,10 @@
 # 1. Introdução <a name="intro"></a>
 
 ## Objetivo <a name="Objetivo"></a>
-O objetivo deste produto é fornecer um serviço automatizado que recomenda leads para um usuário dado sua atual lista de clientes (Portfólio).
+O objetivo deste produto é fornecer um serviço automatizado que recomenda *leads* para um usuário dado sua atual lista de clientes (Portfólio).
 
 ## Contextualização 
-Algumas empresas gostariam de saber quem são as demais empresas em um determinado mercado (população) que tem maior probabilidade se tornarem seus próximos clientes. Ou seja, a sua solução deve encontrar no mercado quem são os leads mais aderentes dado as características dos clientes presentes no portfólio do usuário.
+Algumas empresas gostariam de saber quem são as demais empresas em um determinado mercado (população) que tem maior probabilidade se tornarem seus próximos clientes. Ou seja, a sua solução deve encontrar no mercado quem são os *leads* mais aderentes dado as características dos clientes presentes no portfólio do usuário.
 
 Mais informações: [Instruções do Projeto](Instrucoes_Projeto.md)
 
@@ -93,7 +93,7 @@ Notebook: [Experiment_A](https://github.com/ysraell/aceleradev_private/blob/mast
 
 #### Experimento com o módulo `SVD`:
 
-- O tempo de treino ficou em média $405 s = 6,75 \text{min}$. E isso já não me pareceu bom, visto que estava usando menos de $20\%$ das colunas.
+- O tempo de treino ficou em média `405 s = 6,75 min`. E isso já não me pareceu bom, visto que estava usando menos de $20\%$ das colunas.
 - RMSE em torno de $18$, visto que a escola de *rating* era 100. Data as circunstâncias, não me pareceu muito ruim. Todavia, não era uma maravilha!
 
 # 5. Experimento B. <a name="EB"></a>
@@ -103,7 +103,7 @@ Notebook: [Experiment_A](https://github.com/ysraell/aceleradev_private/blob/mast
 - Revisão do processamento do *dataset* para uso no treino.
 - Extensão da classe `SVD` adicionando o cálculo das distâncias e ordenamento pelos mais próximos.
 - Uso da função de busca por parâmetros de treino `GridSearchCV`.
-- Foi possível um RMSE em torno de $9$.
+- Foi possível um RMSE em torno de 9.
 - Usando ainda apenas 20 das 167 colunas.
 
 # 6. Experimento C. <a name="EC"></a>
@@ -124,7 +124,7 @@ Notebooks: [Pythran/Basic_Tutorial](https://github.com/ysraell/examples/blob/mas
 - O passo de treino continua lento, ficando complicado de uma busca por parÂmetros.
 - Resolvi que deveria abandonar a biblioteca *Surprise* e escrever o módulo de treino.
 - Num primeiro momento houve um certo ganho de performance, principalmente no passo de treino.
-- E os primeiros resultados de acurácia de recomendação `1-1` foi de 0 para o portfólio 1, $22%$ para o 2 e $23%$ para o 3. Nisso já comecei a ficar desconfiado desse primeiro portfólio. Conversando com outros colegas, eles também relataram que esse portfólio estava com métricas bem ruins e o 2 e o 3 estavam boas.
+- E os primeiros resultados de acurácia de recomendação `1-1` foi de 0 para o portfólio 1, 22\% para o 2 e 23\% para o 3. Nisso já comecei a ficar desconfiado desse primeiro portfólio. Conversando com outros colegas, eles também relataram que esse portfólio estava com métricas bem ruins e o 2 e o 3 estavam boas.
 
 # 8. Experimento E. <a name="EE"></a>
 
@@ -163,12 +163,12 @@ Notebook de demonstração: [Usage.ipynb](https://github.com/ysraell/aceleradev_
 - Limitado às empresas cadastradas antes do treino.
 - Complexidade de fazer um *encoder* genérico, visto a abordagem de fatoração e redução de dimensionalidade.
 - A redução de dimensionalidade apresenta maior vantagem na melhora da recomendação e não necessariamente na redução do tempo de processamento geral (dada a presente quantidade e características dos dados). E o objetivo em usar uma decomposição foi para melhorar a recomendação.
-- Calcular a distância de cada empresa (vetor) de entrada para cada uma existente no *dataset*: talvez o modelo não seja escalável: tanto pelo tempo quanto pelo possível uso de memória se forem salvas as distâncias. É possível otimizar o uso de memória salvando apenas a ordem de proximidade (inteiros positivos até 16 bits - `uint16`), mas carece de validação.
+- Calcular a distância de cada empresa (vetor) de entrada para cada uma existente no *dataset* pode tornar o modelo não seja escalável: tanto pelo tempo quanto pelo possível uso de memória se forem salvas as distâncias. É possível otimizar o uso de memória salvando apenas a ordem de proximidade (inteiros positivos até 16 bits - `uint16`), mas carece de validação.
 - As duas métricas de performance de recomendação: (1) total de acertos *vs* (2) percentual médio de acertos entre os portfólios. A métrica 1 é interessante para ajudar na busca por parâmetros e a 2 indica um grau de generalização. Quanto maior o portfólio, não seria maior a chance de acerto?  
 Total de empresas: 462.299 (estaticos_market.csv).  
 Portfólio 1: 567 (estaticos_portfolio2.csv).  
 Portfólio 2: 266 (estaticos_portfolio3.csv).  
-$ P1 = 2.1\times P2 $
+`P1 = 2.1*P2`
 
 ### Possibilidades de melhora.
 
